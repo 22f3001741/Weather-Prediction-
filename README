@@ -1,0 +1,109 @@
+==========================================
+WEATHER PREDICTION — FULL SETUP & RUN GUIDE
+==========================================
+
+This project predicts weather parameters such as temperature, humidity, and rainfall using Python, Flask, and Machine Learning models.
+It provides a simple web interface to input weather data and view predictions in real-time.
+
+------------------------------------------------------------
+1. CLONE THE REPOSITORY
+------------------------------------------------------------
+Open terminal or PowerShell and run:
+git clone https://github.com/22f3001741/Weather-Prediction-.git
+cd Weather-Prediction-
+
+------------------------------------------------------------
+2. IF YOU ALREADY HAVE A LOCAL FOLDER
+------------------------------------------------------------
+If you created the project locally and want to connect it to this repository:
+git init
+git remote add origin https://github.com/22f3001741/Weather-Prediction-.git
+git branch -M main
+
+------------------------------------------------------------
+3. CREATE A VIRTUAL ENVIRONMENT
+------------------------------------------------------------
+Create an isolated environment for dependencies:
+python -m venv venv
+
+------------------------------------------------------------
+4. ACTIVATE THE VIRTUAL ENVIRONMENT
+------------------------------------------------------------
+For Windows:
+venv\Scripts\activate
+
+For macOS/Linux:
+source venv/bin/activate
+
+------------------------------------------------------------
+5. CREATE .gitignore FILE
+------------------------------------------------------------
+Add the following lines into a file named .gitignore:
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+.DS_Store
+.env
+*.log
+
+Or create from PowerShell:
+echo "venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+.DS_Store
+.env
+*.log" > .gitignore
+
+------------------------------------------------------------
+6. INSTALL DEPENDENCIES
+------------------------------------------------------------
+If requirements.txt exists:
+pip install -r requirements.txt
+
+Or install manually:
+pip install flask pandas numpy scikit-learn matplotlib plotly requests
+
+------------------------------------------------------------
+7. UPDATE WEATHER DATA AND RUN MODEL PREDICTIONS
+------------------------------------------------------------
+After activating the virtual environment, run these commands one by one:
+
+python scripts_v2/update_weather_data.py
+(This script updates or fetches the latest weather data.)
+
+python smart_predictions.py
+(This script uses the ML model to generate or refresh predictions.)
+
+------------------------------------------------------------
+8. RUN THE FLASK APPLICATION (LAUNCH THE SERVER)
+------------------------------------------------------------
+Finally, start the Flask web server:
+python .\app\main.py
+
+You should see output like:
+ * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+
+------------------------------------------------------------
+9. OPEN THE WEB APP
+------------------------------------------------------------
+Open a browser and visit:
+http://127.0.0.1:5000/
+
+You will see the Weather Prediction interface with live data and predictions.
+
+------------------------------------------------------------
+AUTHOR
+------------------------------------------------------------
+Archit Samvart  
+B.S. in Data Science and Applications, IIT Madras  
+GitHub: https://github.com/22f3001741
+
+
