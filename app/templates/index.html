@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🌤️ Hybrid Weather AI Dashboard</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <!-- Vanilla Tilt -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+
+  <!-- Custom Styles -->
+  <style>
+    body {
+      background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+      color: #e6faff;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      position: relative;
+      transition: background 0.5s ease;
+    }
+
+    body.light-mode {
+      background: linear-gradient(135deg, #e6faff 0%, #b3e5fc 100%);
+      color: #0d1b2a;
+    }
+
+    body.light-mode h1, body.light-mode h2 {
+      color: #0288d1;
+      text-shadow: 0 0 10px rgba(2, 136, 209, 0.5);
+    }
+
+    body.light-mode .city-card {
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(2, 136, 209, 0.3);
+      box-shadow: 0 8px 32px rgba(2, 136, 209, 0.2);
+    }
+
+    body.light-mode .live-box {
+      background: rgba(255, 255, 255, 0.2);
+      box-shadow: inset 0 0 15px rgba(2, 136, 209, 0.1);
+    }
+
+    body.light-mode .forecast-table th {
+      background: linear-gradient(90deg, rgba(2, 136, 209, 0.3), rgba(3, 169, 244, 0.3));
+      color: #0d1b2a;
+    }
+
+    body.light-mode .forecast-table td {
+      color: #0d1b2a;
+    }
+
+    #aurora {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: linear-gradient(45deg, #00d4ff, #ff4081, #7c4dff);
+      background-size: 400%;
+      animation: aurora 15s ease infinite;
+      opacity: 0.2;
+    }
+
+    @keyframes aurora {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h1 {
+      text-align: center;
+      color: #00d4ff;
+      text-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin: 60px 0 20px;
+      letter-spacing: 1.5px;
+      animation: fadeIn 1.8s ease-in-out;
+    }
+
+    h2 {
+      color: #00d4ff;
+      font-weight: 600;
+      text-shadow: 0 0 10px rgba(0, 212, 255, 0.4);
+      font-size: 2.2rem;
+      margin-bottom: 30px;
+    }
+
+    .city-card {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(0, 212, 255, 0.15);
+      border-radius: 30px;
+      box-shadow: 0 8px 32px rgba(0, 212, 255, 0.25);
+      padding: 35px;
+      margin: 60px auto;
+      width: 90%;
+      max-width: 1500px;
+      backdrop-filter: blur(15px);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      animation: slideIn 1s ease-out;
+      position: relative;
+    }
+
+    .city-card:hover {
+      transform: translateY(-15px);
+      box-shadow: 0 12px 48px rgba(0, 212, 255, 0.5);
+    }
+
+    .live-box {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 25px;
+      padding: 30px;
+      box-shadow: inset 0 0 20px rgba(0, 212, 255, 0.1);
+      margin-bottom: 40px;
+      transition: background 0.3s ease;
+    }
+
+    .live-box p {
+      margin: 12px 0;
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: #d0efff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .chart-container {
+      margin: 0 auto 60px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 30px;
+      padding: 30px;
+      box-shadow: 0 4px 20px rgba(0, 212, 255, 0.2);
+      position: relative;
+      overflow: visible;
+      min-height: 400px;
+    }
+
+    .chart-container canvas {
+      width: 100% !important;
+      height: 400px !important;
+    }
+
+    .forecast-table {
+      border-radius: 25px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .forecast-table th {
+      background: linear-gradient(90deg, rgba(0, 212, 255, 0.4), rgba(0, 180, 255, 0.4));
+      color: #e6faff;
+      font-weight: 600;
+      text-shadow: 0 0 5px rgba(0, 212, 255, 0.5);
+      padding: 18px;
+    }
+
+    .forecast-table td {
+      border: 1px solid rgba(0, 212, 255, 0.1);
+      padding: 18px;
+      color: #d0efff;
+      font-weight: 400;
+      animation: rowFadeIn 0.6s ease-in-out;
+    }
+
+    .forecast-table tr:hover {
+      background: rgba(0, 212, 255, 0.2);
+      transition: background 0.3s ease;
+    }
+
+    .search-bar {
+      max-width: 600px;
+      margin: 30px auto;
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .search-bar input {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(0, 212, 255, 0.3);
+      border-radius: 30px;
+      padding: 15px 25px;
+      color: #e6faff;
+      width: 100%;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+    }
+
+    .search-bar input:focus {
+      outline: none;
+      border-color: #00d4ff;
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
+    }
+
+    .search-bar button {
+      background: rgba(0, 212, 255, 0.3);
+      border: 1px solid rgba(0, 212, 255, 0.3);
+      border-radius: 30px;
+      padding: 12px 20px;
+      color: #e6faff;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .search-bar button:hover {
+      background: rgba(0, 212, 255, 0.5);
+      box-shadow: 0 0 15px rgba(0, 212, 255, 0.6);
+    }
+
+    .theme-toggle, .forecast-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(0, 212, 255, 0.3);
+      border-radius: 50%;
+      padding: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .forecast-toggle {
+      right: 80px;
+    }
+
+    .theme-toggle:hover, .forecast-toggle:hover {
+      background: rgba(0, 212, 255, 0.4);
+      box-shadow: 0 0 15px rgba(0, 212, 255, 0.6);
+    }
+
+    .skeleton-loader {
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 25%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.1) 75%);
+      background-size: 200% 100%;
+      animation: skeleton 1.5s ease-in-out infinite;
+      border-radius: 10px;
+    }
+
+    .no-data {
+      text-align: center;
+      color: #ff4081;
+      font-size: 1.2rem;
+      margin: 40px auto;
+    }
+
+    @keyframes skeleton {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    footer {
+      text-align: center;
+      color: #00d4ff;
+      margin: 80px 0 50px;
+      font-size: 1.2rem;
+      font-weight: 400;
+      text-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+    }
+
+    canvas {
+      border-radius: 25px;
+      animation: chartGlow 2.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes chartGlow {
+      from { box-shadow: 0 0 10px rgba(0, 212, 255, 0.2); }
+      to { box-shadow: 0 0 25px rgba(0, 212, 255, 0.6); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(60px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes rowFadeIn {
+      from { opacity: 0; transform: translateX(-15px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @media (max-width: 768px) {
+      h1 { font-size: 2.5rem; }
+      h2 { font-size: 1.8rem; }
+      .city-card { width: 95%; padding: 25px; margin: 40px auto; }
+      .live-box p { font-size: 1.1rem; }
+      .forecast-table th, .forecast-table td { font-size: 0.95rem; padding: 12px; }
+      .chart-container { padding: 20px; min-height: 300px; }
+      .chart-container canvas { height: 300px !important; }
+      .search-bar { max-width: 90%; }
+      .theme-toggle { top: 15px; right: 15px; }
+      .forecast-toggle { right: 70px; }
+    }
+
+    @media (max-width: 576px) {
+      h1 { font-size: 2rem; }
+      .city-card { margin: 30px auto; }
+      .forecast-table th, .forecast-table td { font-size: 0.9rem; padding: 10px; }
+      .chart-container canvas { height: 250px !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Aurora Background -->
+  <div id="aurora"></div>
+
+  <!-- Theme Toggle -->
+  <button class="theme-toggle" aria-label="Toggle theme">
+    <i class="fas fa-adjust"></i>
+  </button>
+
+  <!-- Forecast Period Toggle -->
+  <button class="forecast-toggle" aria-label="Toggle forecast period">
+    <i class="fas fa-calendar-alt"></i>
+  </button>
+
+  <div class="container-fluid text-center">
+    <h1>🌤️ Hybrid Weather Prediction AI Dashboard</h1>
+    <p class="text-secondary" style="font-size: 1.2rem; font-weight: 400;">
+      Auto-calibrated forecasts (LSTM + 5-day + 5-year) —
+      <b>
+        {% set first_city = data.keys() | list | first %}
+        {% if first_city %}
+          Last updated: {{ data[first_city]["generated_at"] }}
+        {% else %}
+          No forecast data available.
+        {% endif %}
+      </b>
+    </p>
+
+    <!-- Search Bar -->
+    <div class="search-bar">
+      <input type="text" placeholder="Search for a city..." aria-label="Search for a city">
+      <button aria-label="Search"><i class="fas fa-search"></i> Search</button>
+    </div>
+  </div>
+
+  {% for city, city_data in data.items() %}
+  <section class="city-card shadow-lg" aria-labelledby="city-{{ loop.index0 }}-title" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-perspective="1000">
+    <h2 id="city-{{ loop.index0 }}-title">🏙️ {{ city }}</h2>
+
+    <!-- Live Weather Info -->
+    <div class="live-box">
+      <p><b>Current Weather:</b></p>
+      <p><i class="fas {{ 'fa-sun' if city_data['current_weather']['weather'] == 'Sunny' else 'fa-cloud-rain' if city_data['current_weather']['weather'] == 'Rain' else 'fa-cloud' }}"></i> 
+         Temp: {{ city_data["current_weather"]["temperature"] }}°C
+         (Feels {{ city_data["current_weather"]["apparent_temperature"] }}°C)</p>
+      <p><i class="fas fa-tint"></i> Humidity: {{ city_data["current_weather"]["humidity"] }}% |
+         <i class="fas fa-wind"></i> Wind: {{ city_data["current_weather"]["wind_speed"] }} m/s |
+         <i class="fas fa-cloud"></i> Clouds: {{ city_data["current_weather"]["clouds"] }}%</p>
+      <p><i class="fas {{ 'fa-sun' if city_data['current_weather']['weather'] == 'Sunny' else 'fa-cloud-rain' if city_data['current_weather']['weather'] == 'Rain' else 'fa-cloud' }}"></i> 
+         {{ city_data["current_weather"]["weather"] }}</p>
+    </div>
+
+    <!-- Chart -->
+    <div class="chart-container">
+      <canvas id="chart_{{ loop.index0 }}" aria-label="Temperature forecast chart for {{ city }}"></canvas>
+    </div>
+
+    <!-- Forecast Table -->
+    <div class="table-responsive forecast-table">
+      <h4 class="text-info mb-4">🕓 <span class="forecast-period">24-Hour Forecast</span></h4>
+      <table class="table table-dark table-striped table-hover align-middle mb-0">
+        <thead>
+          <tr>
+            <th>Hour</th>
+            <th>Predicted Temp (°C)</th>
+            <th>Feels Like (°C)</th>
+            <th>LSTM (°C)</th>
+            <th>5-Day Avg (°C)</th>
+            <th>5-Year Avg (°C)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for f in city_data["forecast"] %}
+          <tr>
+            <td>{{ f["time"] | replace("T", " ") }}</td>
+            <td>{{ "%.2f"|format(f["final_temperature"]) }}</td>
+            <td>{{ "%.2f"|format(f["predicted_feels_like"]) }}</td>
+            <td>{{ "%.2f"|format(f["lstm_temperature"]) }}</td>
+            <td>{% if f["recent_5d_avg"] %}{{ "%.2f"|format(f["recent_5d_avg"]) }}{% else %}-{% endif %}</td>
+            <td>{% if f["hist_5yr_avg"] %}{{ "%.2f"|format(f["hist_5yr_avg"]) }}{% else %}-{% endif %}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+  {% else %}
+  <div class="no-data">
+    <p>No weather data available. Please search for a city or try again later.</p>
+  </div>
+  {% endfor %}
+
+  <footer>
+    <p>🚀 Powered by <b>@ Brahmarshi Ji © 2025</b> | Crafted with 💡 & AI Excellence</p>
+  </footer>
+
+  <script>
+    // Weather Icon Mapping
+    const weatherIcons = {
+      'Sunny': 'fa-sun',
+      'Rain': 'fa-cloud-rain',
+      'Cloudy': 'fa-cloud',
+      'Snow': 'fa-snowflake',
+      'Fog': 'fa-smog',
+      'Clear': 'fa-moon',
+      'default': 'fa-cloud'
+    };
+
+    // Chart Setup
+    document.addEventListener("DOMContentLoaded", function() {
+      {% for city, city_data in data.items() %}
+      try {
+        const ctx_{{ loop.index0 }} = document.getElementById("chart_{{ loop.index0 }}").getContext("2d");
+        const forecast_{{ loop.index0 }} = {{ city_data["forecast"] | tojson }};
+        if (!forecast_{{ loop.index0 }} || !Array.isArray(forecast_{{ loop.index0 }}) || forecast_{{ loop.index0 }}.length === 0) {
+          console.error(`No forecast data for ${'{{ city }}'}`);
+          return;
+        }
+
+        const labels_{{ loop.index0 }} = forecast_{{ loop.index0 }}.map(
+          d => new Date(d.time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+        );
+        const temps_{{ loop.index0 }} = forecast_{{ loop.index0 }}.map(d => d.final_temperature || 0);
+        const feels_{{ loop.index0 }} = forecast_{{ loop.index0 }}.map(d => d.predicted_feels_like || 0);
+
+        // Gradients
+        const tempGradient = ctx_{{ loop.index0 }}.createLinearGradient(0, 0, 0, 400);
+        tempGradient.addColorStop(0, 'rgba(0, 212, 255, 0.9)');
+        tempGradient.addColorStop(1, 'rgba(0, 180, 255, 0.3)');
+
+        const feelsGradient = ctx_{{ loop.index0 }}.createLinearGradient(0, 0, 0, 400);
+        feelsGradient.addColorStop(0, 'rgba(255, 180, 0, 0.9)');
+        feelsGradient.addColorStop(1, 'rgba(255, 120, 0, 0.3)');
+
+        new Chart(ctx_{{ loop.index0 }}, {
+          type: "line",
+          data: {
+            labels: labels_{{ loop.index0 }},
+            datasets: [
+              {
+                label: "Predicted Temp (°C)",
+                data: temps_{{ loop.index0 }},
+                borderWidth: 4,
+                fill: true,
+                borderColor: tempGradient,
+                backgroundColor: 'rgba(0, 212, 255, 0.2)',
+                tension: 0.4,
+                pointRadius: 5,
+                pointHoverRadius: 10,
+                pointBackgroundColor: 'rgba(0, 212, 255, 0.9)',
+              },
+              {
+                label: "Feels Like (°C)",
+                data: feels_{{ loop.index0 }},
+                borderWidth: 3,
+                fill: false,
+                borderColor: feelsGradient,
+                borderDash: [6, 6],
+                tension: 0.4,
+                pointRadius: 5,
+                pointHoverRadius: 10,
+                pointBackgroundColor: 'rgba(255, 180, 0, 0.9)',
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            animation: { duration: 2000, easing: "easeInOutQuart" },
+            scales: {
+              x: {
+                ticks: { color: "rgba(255,255,255,0.9)", font: { size: 14 } },
+                grid: { color: "rgba(255,255,255,0.05)" }
+              },
+              y: {
+                ticks: { color: "rgba(255,255,255,0.9)", font: { size: 14 } },
+                grid: { color: "rgba(255,255,255,0.05)" }
+              }
+            },
+            plugins: {
+              legend: {
+                labels: { color: "rgba(255,255,255,0.9)", font: { size: 16 } }
+              },
+              tooltip: {
+                backgroundColor: 'rgba(0, 20, 30, 0.95)',
+                titleFont: { size: 16 },
+                bodyFont: { size: 14 },
+                padding: 15,
+                cornerRadius: 12
+              }
+            }
+          }
+        });
+      } catch (error) {
+        console.error(`Error rendering chart for ${'{{ city }}'}:`, error);
+      }
+      {% endfor %}
+
+      // Theme Toggle
+      const themeToggle = document.querySelector('.theme-toggle');
+      themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('light-mode');
+        localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+      });
+
+      // Load Theme Preference
+      if (localStorage.getItem('theme') === 'light') {
+        document.body.classList.add('light-mode');
+      }
+
+      // Forecast Toggle
+      const forecastToggle = document.querySelector('.forecast-toggle');
+      const forecastPeriods = document.querySelectorAll('.forecast-period');
+      let is24Hour = true;
+      forecastToggle.addEventListener('click', () => {
+        is24Hour = !is24Hour;
+        forecastPeriods.forEach(period => {
+          period.textContent = is24Hour ? '24-Hour Forecast' : '5-Day Forecast';
+        });
+        console.log('Toggled to:', is24Hour ? '24-Hour' : '5-Day');
+        // TODO: Implement 5-day forecast data fetching and chart update
+      });
+
+      // Search Functionality
+      const searchInput = document.querySelector('.search-bar input');
+      const searchButton = document.querySelector('.search-bar button');
+      const searchCities = () => {
+        const query = searchInput.value.trim().toLowerCase();
+        const cityCards = document.querySelectorAll('.city-card');
+        if (cityCards.length === 0) {
+          console.log('No city cards available to filter');
+          return;
+        }
+        cityCards.forEach(card => {
+          const cityName = card.querySelector('h2').textContent.toLowerCase();
+          card.style.display = query === '' || cityName.includes(query) ? 'block' : 'none';
+        });
+        // Placeholder for server-side search
+        // Example: fetch(`/api/weather?city=${query}`).then(response => ...)
+      };
+      searchInput.addEventListener('input', searchCities);
+      searchButton.addEventListener('click', searchCities);
+
+      // Smooth Scroll
+      document.querySelectorAll('.city-card').forEach(card => {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.style.opacity = '1';
+              entry.target.style.transform = 'translateY(0)';
+            }
+          });
+        }, { threshold: 0.1 });
+        observer.observe(card);
+      });
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

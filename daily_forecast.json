@@ -1,0 +1,1037 @@
+{
+  "Bengaluru": {
+    "generated_at": "12 Oct 2025, 06:04 PM",
+    "current_weather": {
+      "temperature": 25.95,
+      "apparent_temperature": 25.95,
+      "humidity": 59,
+      "pressure": 1010,
+      "weather": "Broken Clouds",
+      "wind_speed": 3.01,
+      "clouds": 65,
+      "time": "2025-10-12 18:04:45.579528"
+    },
+    "forecast": [
+      {
+        "time": "2025-10-12 19:00:00",
+        "lstm_temperature": 14.171783910691738,
+        "recent_5d_avg": 22.733333333333334,
+        "hist_5yr_avg": 21.6,
+        "final_temperature": 24.029666666666664,
+        "predicted_feels_like": 24.029666666666664
+      },
+      {
+        "time": "2025-10-12 20:00:00",
+        "lstm_temperature": 14.18687085211277,
+        "recent_5d_avg": 22.266666666666666,
+        "hist_5yr_avg": 21.18,
+        "final_temperature": 23.126444444444445,
+        "predicted_feels_like": 23.126444444444445
+      },
+      {
+        "time": "2025-10-12 21:00:00",
+        "lstm_temperature": 14.216811364144087,
+        "recent_5d_avg": 21.8,
+        "hist_5yr_avg": 20.84,
+        "final_temperature": 21.906444444444446,
+        "predicted_feels_like": 21.906444444444446
+      },
+      {
+        "time": "2025-10-12 22:00:00",
+        "lstm_temperature": 14.251378314197064,
+        "recent_5d_avg": 21.033333333333335,
+        "hist_5yr_avg": 20.520000000000003,
+        "final_temperature": 20.908888888888892,
+        "predicted_feels_like": 20.908888888888892
+      },
+      {
+        "time": "2025-10-12 23:00:00",
+        "lstm_temperature": 14.282148634642363,
+        "recent_5d_avg": 21.0,
+        "hist_5yr_avg": 20.259999999999998,
+        "final_temperature": 20.685555555555556,
+        "predicted_feels_like": 20.685555555555556
+      },
+      {
+        "time": "2025-10-13 00:00:00",
+        "lstm_temperature": 14.306210824847222,
+        "recent_5d_avg": 21.1,
+        "hist_5yr_avg": 20.2,
+        "final_temperature": 20.505,
+        "predicted_feels_like": 20.505
+      },
+      {
+        "time": "2025-10-13 01:00:00",
+        "lstm_temperature": 14.315397725999356,
+        "recent_5d_avg": 20.55,
+        "hist_5yr_avg": 19.919999999999998,
+        "final_temperature": 20.266666666666666,
+        "predicted_feels_like": 20.266666666666666
+      },
+      {
+        "time": "2025-10-13 02:00:00",
+        "lstm_temperature": 14.297060189396143,
+        "recent_5d_avg": 20.15,
+        "hist_5yr_avg": 19.68,
+        "final_temperature": 19.991666666666667,
+        "predicted_feels_like": 19.991666666666667
+      },
+      {
+        "time": "2025-10-13 03:00:00",
+        "lstm_temperature": 14.246786707639695,
+        "recent_5d_avg": 20.05,
+        "hist_5yr_avg": 19.6,
+        "final_temperature": 19.786666666666665,
+        "predicted_feels_like": 19.786666666666665
+      },
+      {
+        "time": "2025-10-13 04:00:00",
+        "lstm_temperature": 14.171439284086228,
+        "recent_5d_avg": 19.7,
+        "hist_5yr_avg": 19.54,
+        "final_temperature": 19.735,
+        "predicted_feels_like": 19.735
+      },
+      {
+        "time": "2025-10-13 05:00:00",
+        "lstm_temperature": 14.079560642689467,
+        "recent_5d_avg": 20.0,
+        "hist_5yr_avg": 19.520000000000003,
+        "final_temperature": 19.726666666666667,
+        "predicted_feels_like": 19.726666666666667
+      },
+      {
+        "time": "2025-10-13 06:00:00",
+        "lstm_temperature": 13.97483308389783,
+        "recent_5d_avg": 20.1,
+        "hist_5yr_avg": 19.5,
+        "final_temperature": 20.186666666666667,
+        "predicted_feels_like": 20.186666666666667
+      },
+      {
+        "time": "2025-10-13 07:00:00",
+        "lstm_temperature": 13.862373144924641,
+        "recent_5d_avg": 21.4,
+        "hist_5yr_avg": 20.6,
+        "final_temperature": 21.173333333333332,
+        "predicted_feels_like": 21.173333333333332
+      },
+      {
+        "time": "2025-10-13 08:00:00",
+        "lstm_temperature": 13.754577343910933,
+        "recent_5d_avg": 23.0,
+        "hist_5yr_avg": 22.439999999999998,
+        "final_temperature": 22.695000000000004,
+        "predicted_feels_like": 22.695000000000004
+      },
+      {
+        "time": "2025-10-13 09:00:00",
+        "lstm_temperature": 13.666821313649416,
+        "recent_5d_avg": 24.75,
+        "hist_5yr_avg": 23.98,
+        "final_temperature": 24.243333333333336,
+        "predicted_feels_like": 24.243333333333336
+      },
+      {
+        "time": "2025-10-13 10:00:00",
+        "lstm_temperature": 13.596764174848795,
+        "recent_5d_avg": 25.950000000000003,
+        "hist_5yr_avg": 25.34,
+        "final_temperature": 25.405,
+        "predicted_feels_like": 25.70437746454428
+      },
+      {
+        "time": "2025-10-13 11:00:00",
+        "lstm_temperature": 13.55370992384851,
+        "recent_5d_avg": 26.15,
+        "hist_5yr_avg": 26.26,
+        "final_temperature": 26.278333333333336,
+        "predicted_feels_like": 26.913192474690685
+      },
+      {
+        "time": "2025-10-13 12:00:00",
+        "lstm_temperature": 13.53528305478394,
+        "recent_5d_avg": 27.35,
+        "hist_5yr_avg": 26.619999999999997,
+        "final_temperature": 26.641666666666666,
+        "predicted_feels_like": 27.595766536050434
+      },
+      {
+        "time": "2025-10-13 13:00:00",
+        "lstm_temperature": 13.540710411593318,
+        "recent_5d_avg": 26.95,
+        "hist_5yr_avg": 26.52,
+        "final_temperature": 26.645,
+        "predicted_feels_like": 27.599291408343223
+      },
+      {
+        "time": "2025-10-13 14:00:00",
+        "lstm_temperature": 13.566554538533092,
+        "recent_5d_avg": 26.35,
+        "hist_5yr_avg": 26.080000000000002,
+        "final_temperature": 26.241666666666664,
+        "predicted_feels_like": 26.86047639819682
+      },
+      {
+        "time": "2025-10-13 15:00:00",
+        "lstm_temperature": 13.609036631509662,
+        "recent_5d_avg": 25.95,
+        "hist_5yr_avg": 25.6,
+        "final_temperature": 25.698333333333334,
+        "predicted_feels_like": 25.997902336837072
+      },
+      {
+        "time": "2025-10-13 16:00:00",
+        "lstm_temperature": 13.658089270442725,
+        "recent_5d_avg": 25.25,
+        "hist_5yr_avg": 24.96,
+        "final_temperature": 24.64833333333333,
+        "predicted_feels_like": 24.64833333333333
+      },
+      {
+        "time": "2025-10-13 17:00:00",
+        "lstm_temperature": 13.70946096777916,
+        "recent_5d_avg": 22.75,
+        "hist_5yr_avg": 23.38,
+        "final_temperature": 23.513333333333332,
+        "predicted_feels_like": 23.513333333333332
+      },
+      {
+        "time": "2025-10-13 18:00:00",
+        "lstm_temperature": 13.75558520257473,
+        "recent_5d_avg": 22.5,
+        "hist_5yr_avg": 22.240000000000002,
+        "final_temperature": 22.717499999999994,
+        "predicted_feels_like": 22.717499999999994
+      }
+    ]
+  },
+  "Chennai": {
+    "generated_at": "12 Oct 2025, 06:04 PM",
+    "current_weather": {
+      "temperature": 28.31,
+      "apparent_temperature": 31.74,
+      "humidity": 73,
+      "pressure": 1008,
+      "weather": "Overcast Clouds",
+      "wind_speed": 4.19,
+      "clouds": 99,
+      "time": "2025-10-12 18:04:49.249765"
+    },
+    "forecast": [
+      {
+        "time": "2025-10-12 19:00:00",
+        "lstm_temperature": 27.948867464065554,
+        "recent_5d_avg": 27.53333333333333,
+        "hist_5yr_avg": 26.979999999999997,
+        "final_temperature": 27.466220079739887,
+        "predicted_feels_like": 30.04213667060231
+      },
+      {
+        "time": "2025-10-12 20:00:00",
+        "lstm_temperature": 27.34524805545807,
+        "recent_5d_avg": 26.8,
+        "hist_5yr_avg": 26.9,
+        "final_temperature": 27.162052013397215,
+        "predicted_feels_like": 29.467001362388533
+      },
+      {
+        "time": "2025-10-12 21:00:00",
+        "lstm_temperature": 26.54076509475708,
+        "recent_5d_avg": 26.566666666666666,
+        "hist_5yr_avg": 26.759999999999998,
+        "final_temperature": 26.523453561464947,
+        "predicted_feels_like": 28.27503984631942
+      },
+      {
+        "time": "2025-10-12 22:00:00",
+        "lstm_temperature": 26.099956274032596,
+        "recent_5d_avg": 26.233333333333334,
+        "hist_5yr_avg": 26.48,
+        "final_temperature": 26.173827744854822,
+        "predicted_feels_like": 27.263021644392612
+      },
+      {
+        "time": "2025-10-12 23:00:00",
+        "lstm_temperature": 25.668911767005923,
+        "recent_5d_avg": 25.933333333333334,
+        "hist_5yr_avg": 26.5,
+        "final_temperature": 26.217589117950865,
+        "predicted_feels_like": 27.338952831997428
+      },
+      {
+        "time": "2025-10-13 00:00:00",
+        "lstm_temperature": 25.30787813663483,
+        "recent_5d_avg": 27.05,
+        "hist_5yr_avg": 26.32,
+        "final_temperature": 26.03101289245818,
+        "predicted_feels_like": 26.65085432871665
+      },
+      {
+        "time": "2025-10-13 01:00:00",
+        "lstm_temperature": 25.493832254409792,
+        "recent_5d_avg": 26.7,
+        "hist_5yr_avg": 25.72,
+        "final_temperature": 25.832519853115084,
+        "predicted_feels_like": 26.452361289373556
+      },
+      {
+        "time": "2025-10-13 02:00:00",
+        "lstm_temperature": 25.351286864280702,
+        "recent_5d_avg": 26.450000000000003,
+        "hist_5yr_avg": 25.059999999999995,
+        "final_temperature": 25.306879138151803,
+        "predicted_feels_like": 25.306879138151803
+      },
+      {
+        "time": "2025-10-13 03:00:00",
+        "lstm_temperature": 25.17615571022034,
+        "recent_5d_avg": 26.15,
+        "hist_5yr_avg": 25.04,
+        "final_temperature": 25.134698158105213,
+        "predicted_feels_like": 25.134698158105213
+      },
+      {
+        "time": "2025-10-13 04:00:00",
+        "lstm_temperature": 25.320746374130252,
+        "recent_5d_avg": 26.0,
+        "hist_5yr_avg": 24.86,
+        "final_temperature": 25.415491195519763,
+        "predicted_feels_like": 25.893212655043452
+      },
+      {
+        "time": "2025-10-13 05:00:00",
+        "lstm_temperature": 25.746045088768007,
+        "recent_5d_avg": 26.35,
+        "hist_5yr_avg": 24.96,
+        "final_temperature": 25.89791952530543,
+        "predicted_feels_like": 26.963706921738677
+      },
+      {
+        "time": "2025-10-13 06:00:00",
+        "lstm_temperature": 26.610725688934327,
+        "recent_5d_avg": 26.5,
+        "hist_5yr_avg": 25.78,
+        "final_temperature": 26.51336103717486,
+        "predicted_feels_like": 28.264844860182134
+      },
+      {
+        "time": "2025-10-13 07:00:00",
+        "lstm_temperature": 27.033395445346834,
+        "recent_5d_avg": 27.5,
+        "hist_5yr_avg": 26.839999999999996,
+        "final_temperature": 27.25402018904686,
+        "predicted_feels_like": 29.653946229588986
+      },
+      {
+        "time": "2025-10-13 08:00:00",
+        "lstm_temperature": 27.12282147407532,
+        "recent_5d_avg": 28.6,
+        "hist_5yr_avg": 27.940000000000005,
+        "final_temperature": 28.215565907557803,
+        "predicted_feels_like": 31.66708457331053
+      },
+      {
+        "time": "2025-10-13 09:00:00",
+        "lstm_temperature": 27.80257670879364,
+        "recent_5d_avg": 29.799999999999997,
+        "hist_5yr_avg": 29.079999999999995,
+        "final_temperature": 29.343333333333334,
+        "predicted_feels_like": 34.21324184127322
+      },
+      {
+        "time": "2025-10-13 10:00:00",
+        "lstm_temperature": 28.53409231901169,
+        "recent_5d_avg": 30.7,
+        "hist_5yr_avg": 29.939999999999998,
+        "final_temperature": 30.23166666666667,
+        "predicted_feels_like": 36.44392949901982
+      },
+      {
+        "time": "2025-10-13 11:00:00",
+        "lstm_temperature": 29.11863768100739,
+        "recent_5d_avg": 31.450000000000003,
+        "hist_5yr_avg": 30.419999999999998,
+        "final_temperature": 30.718333333333334,
+        "predicted_feels_like": 37.737835515983015
+      },
+      {
+        "time": "2025-10-13 12:00:00",
+        "lstm_temperature": 29.484637045860293,
+        "recent_5d_avg": 31.3,
+        "hist_5yr_avg": 30.5,
+        "final_temperature": 30.61,
+        "predicted_feels_like": 37.45016073712406
+      },
+      {
+        "time": "2025-10-13 13:00:00",
+        "lstm_temperature": 29.4047837138176,
+        "recent_5d_avg": 29.85,
+        "hist_5yr_avg": 30.140000000000004,
+        "final_temperature": 30.198333333333334,
+        "predicted_feels_like": 36.33986335804227
+      },
+      {
+        "time": "2025-10-13 14:00:00",
+        "lstm_temperature": 28.822557461261752,
+        "recent_5d_avg": 29.700000000000003,
+        "hist_5yr_avg": 29.7,
+        "final_temperature": 29.85333333333334,
+        "predicted_feels_like": 35.40353803763607
+      },
+      {
+        "time": "2025-10-13 15:00:00",
+        "lstm_temperature": 28.476365995407107,
+        "recent_5d_avg": 29.95,
+        "hist_5yr_avg": 29.78,
+        "final_temperature": 29.683333333333337,
+        "predicted_feels_like": 34.97057192081366
+      },
+      {
+        "time": "2025-10-13 16:00:00",
+        "lstm_temperature": 28.40591005086899,
+        "recent_5d_avg": 29.65,
+        "hist_5yr_avg": 29.32,
+        "final_temperature": 29.24318536639214,
+        "predicted_feels_like": 33.929746115055934
+      },
+      {
+        "time": "2025-10-13 17:00:00",
+        "lstm_temperature": 28.239112198352817,
+        "recent_5d_avg": 29.05,
+        "hist_5yr_avg": 28.52,
+        "final_temperature": 28.651518699725468,
+        "predicted_feels_like": 32.54020616933492
+      },
+      {
+        "time": "2025-10-13 18:00:00",
+        "lstm_temperature": 27.708019828796388,
+        "recent_5d_avg": 28.2,
+        "hist_5yr_avg": 27.98,
+        "final_temperature": 28.2347780495882,
+        "predicted_feels_like": 31.575141194382653
+      }
+    ]
+  },
+  "Delhi": {
+    "generated_at": "12 Oct 2025, 06:04 PM",
+    "current_weather": {
+      "temperature": 30.8,
+      "apparent_temperature": 29.22,
+      "humidity": 26,
+      "pressure": 1009,
+      "weather": "Clear Sky",
+      "wind_speed": 3.94,
+      "clouds": 0,
+      "time": "2025-10-12 18:04:52.643426"
+    },
+    "forecast": [
+      {
+        "time": "2025-10-12 19:00:00",
+        "lstm_temperature": 22.86809891462326,
+        "recent_5d_avg": 23.0,
+        "hist_5yr_avg": 27.5,
+        "final_temperature": 28.7760656640619,
+        "predicted_feels_like": 27.54596510324547
+      },
+      {
+        "time": "2025-10-12 20:00:00",
+        "lstm_temperature": 22.878568258881568,
+        "recent_5d_avg": 22.433333333333334,
+        "hist_5yr_avg": 26.48,
+        "final_temperature": 27.87902594701667,
+        "predicted_feels_like": 26.94671025915171
+      },
+      {
+        "time": "2025-10-12 21:00:00",
+        "lstm_temperature": 22.851431584358213,
+        "recent_5d_avg": 21.8,
+        "hist_5yr_avg": 25.439999999999998,
+        "final_temperature": 26.204412361307476,
+        "predicted_feels_like": 25.766872433017067
+      },
+      {
+        "time": "2025-10-12 22:00:00",
+        "lstm_temperature": 22.485217458009718,
+        "recent_5d_avg": 21.333333333333332,
+        "hist_5yr_avg": 24.580000000000002,
+        "final_temperature": 24.905704259203347,
+        "predicted_feels_like": 24.793455611882674
+      },
+      {
+        "time": "2025-10-12 23:00:00",
+        "lstm_temperature": 21.582329750061035,
+        "recent_5d_avg": 21.2,
+        "hist_5yr_avg": 23.660000000000004,
+        "final_temperature": 23.67572208822794,
+        "predicted_feels_like": 23.67572208822794
+      },
+      {
+        "time": "2025-10-13 00:00:00",
+        "lstm_temperature": 19.939081451296804,
+        "recent_5d_avg": 21.65,
+        "hist_5yr_avg": 23.139999999999997,
+        "final_temperature": 22.76497369564467,
+        "predicted_feels_like": 22.76497369564467
+      },
+      {
+        "time": "2025-10-13 01:00:00",
+        "lstm_temperature": 18.073180538415908,
+        "recent_5d_avg": 21.5,
+        "hist_5yr_avg": 22.699999999999996,
+        "final_temperature": 22.075,
+        "predicted_feels_like": 22.075
+      },
+      {
+        "time": "2025-10-13 02:00:00",
+        "lstm_temperature": 16.463229477405548,
+        "recent_5d_avg": 21.3,
+        "hist_5yr_avg": 22.160000000000004,
+        "final_temperature": 21.708333333333332,
+        "predicted_feels_like": 21.708333333333332
+      },
+      {
+        "time": "2025-10-13 03:00:00",
+        "lstm_temperature": 15.551164156198501,
+        "recent_5d_avg": 21.049999999999997,
+        "hist_5yr_avg": 21.54,
+        "final_temperature": 21.33666666666667,
+        "predicted_feels_like": 21.33666666666667
+      },
+      {
+        "time": "2025-10-13 04:00:00",
+        "lstm_temperature": 15.787824502587318,
+        "recent_5d_avg": 20.75,
+        "hist_5yr_avg": 21.22,
+        "final_temperature": 21.005,
+        "predicted_feels_like": 21.005
+      },
+      {
+        "time": "2025-10-13 05:00:00",
+        "lstm_temperature": 17.347671627998352,
+        "recent_5d_avg": 20.55,
+        "hist_5yr_avg": 20.919999999999998,
+        "final_temperature": 20.808333333333334,
+        "predicted_feels_like": 20.808333333333334
+      },
+      {
+        "time": "2025-10-13 06:00:00",
+        "lstm_temperature": 19.997328066825865,
+        "recent_5d_avg": 20.55,
+        "hist_5yr_avg": 20.860000000000003,
+        "final_temperature": 21.357441164354483,
+        "predicted_feels_like": 21.357441164354483
+      },
+      {
+        "time": "2025-10-13 07:00:00",
+        "lstm_temperature": 22.8646469861269,
+        "recent_5d_avg": 21.15,
+        "hist_5yr_avg": 22.4,
+        "final_temperature": 22.812387621899447,
+        "predicted_feels_like": 22.812387621899447
+      },
+      {
+        "time": "2025-10-13 08:00:00",
+        "lstm_temperature": 25.159678745269776,
+        "recent_5d_avg": 22.4,
+        "hist_5yr_avg": 25.04,
+        "final_temperature": 25.04720841397842,
+        "predicted_feels_like": 24.75440095992734
+      },
+      {
+        "time": "2025-10-13 09:00:00",
+        "lstm_temperature": 27.15892475247383,
+        "recent_5d_avg": 23.6,
+        "hist_5yr_avg": 27.660000000000004,
+        "final_temperature": 27.265022380948068,
+        "predicted_feels_like": 26.509261078985208
+      },
+      {
+        "time": "2025-10-13 10:00:00",
+        "lstm_temperature": 28.791530787944794,
+        "recent_5d_avg": 24.75,
+        "hist_5yr_avg": 29.78,
+        "final_temperature": 29.136671030322713,
+        "predicted_feels_like": 27.855718102870554
+      },
+      {
+        "time": "2025-10-13 11:00:00",
+        "lstm_temperature": 29.989570641517638,
+        "recent_5d_avg": 25.7,
+        "hist_5yr_avg": 31.439999999999998,
+        "final_temperature": 30.51630741159121,
+        "predicted_feels_like": 28.993557959997293
+      },
+      {
+        "time": "2025-10-13 12:00:00",
+        "lstm_temperature": 30.816743040084837,
+        "recent_5d_avg": 26.5,
+        "hist_5yr_avg": 32.28,
+        "final_temperature": 31.425973431865373,
+        "predicted_feels_like": 29.83495255352605
+      },
+      {
+        "time": "2025-10-13 13:00:00",
+        "lstm_temperature": 31.289526909589767,
+        "recent_5d_avg": 26.700000000000003,
+        "hist_5yr_avg": 32.739999999999995,
+        "final_temperature": 31.897905729413036,
+        "predicted_feels_like": 30.30265169671949
+      },
+      {
+        "time": "2025-10-13 14:00:00",
+        "lstm_temperature": 31.361164426803587,
+        "recent_5d_avg": 26.15,
+        "hist_5yr_avg": 32.9,
+        "final_temperature": 31.9970773033301,
+        "predicted_feels_like": 30.403262173143272
+      },
+      {
+        "time": "2025-10-13 15:00:00",
+        "lstm_temperature": 31.011772483587265,
+        "recent_5d_avg": 25.7,
+        "hist_5yr_avg": 32.68,
+        "final_temperature": 31.71615870197614,
+        "predicted_feels_like": 30.12076091107005
+      },
+      {
+        "time": "2025-10-13 16:00:00",
+        "lstm_temperature": 30.224015301465986,
+        "recent_5d_avg": 25.75,
+        "hist_5yr_avg": 32.120000000000005,
+        "final_temperature": 30.895933043360714,
+        "predicted_feels_like": 29.344552751204333
+      },
+      {
+        "time": "2025-10-13 17:00:00",
+        "lstm_temperature": 28.999810475111005,
+        "recent_5d_avg": 24.9,
+        "hist_5yr_avg": 30.339999999999996,
+        "final_temperature": 29.593899131615956,
+        "predicted_feels_like": 28.22460816768522
+      },
+      {
+        "time": "2025-10-13 18:00:00",
+        "lstm_temperature": 27.45956901311874,
+        "recent_5d_avg": 24.05,
+        "hist_5yr_avg": 28.419999999999998,
+        "final_temperature": 28.804844872057437,
+        "predicted_feels_like": 27.550120329225997
+      }
+    ]
+  },
+  "Kolkata": {
+    "generated_at": "12 Oct 2025, 06:04 PM",
+    "current_weather": {
+      "temperature": 27.78,
+      "apparent_temperature": 30.01,
+      "humidity": 68,
+      "pressure": 1009,
+      "weather": "Clear Sky",
+      "wind_speed": 1.8,
+      "clouds": 4,
+      "time": "2025-10-12 18:04:56.052785"
+    },
+    "forecast": [
+      {
+        "time": "2025-10-12 19:00:00",
+        "lstm_temperature": 26.21016117930412,
+        "recent_5d_avg": 26.46666666666667,
+        "hist_5yr_avg": 29.02,
+        "final_temperature": 26.666086722602444,
+        "predicted_feels_like": 28.208740388632094
+      },
+      {
+        "time": "2025-10-12 20:00:00",
+        "lstm_temperature": 25.8909490853548,
+        "recent_5d_avg": 26.366666666666664,
+        "hist_5yr_avg": 28.660000000000004,
+        "final_temperature": 26.68739114840163,
+        "predicted_feels_like": 28.229409675491606
+      },
+      {
+        "time": "2025-10-12 21:00:00",
+        "lstm_temperature": 25.190064591169357,
+        "recent_5d_avg": 26.3,
+        "hist_5yr_avg": 27.160000000000004,
+        "final_temperature": 26.384047069781356,
+        "predicted_feels_like": 27.764899774231793
+      },
+      {
+        "time": "2025-10-12 22:00:00",
+        "lstm_temperature": 24.468437230587003,
+        "recent_5d_avg": 25.96666666666667,
+        "hist_5yr_avg": 26.620000000000005,
+        "final_temperature": 26.482222222222223,
+        "predicted_feels_like": 27.903965690005492
+      },
+      {
+        "time": "2025-10-12 23:00:00",
+        "lstm_temperature": 23.428753262758253,
+        "recent_5d_avg": 26.066666666666663,
+        "hist_5yr_avg": 26.78,
+        "final_temperature": 26.30888888888889,
+        "predicted_feels_like": 27.650267500471113
+      },
+      {
+        "time": "2025-10-13 00:00:00",
+        "lstm_temperature": 22.431830433011054,
+        "recent_5d_avg": 26.4,
+        "hist_5yr_avg": 26.02,
+        "final_temperature": 26.231111111111108,
+        "predicted_feels_like": 27.541973779093777
+      },
+      {
+        "time": "2025-10-13 01:00:00",
+        "lstm_temperature": 21.789267021417615,
+        "recent_5d_avg": 26.2,
+        "hist_5yr_avg": 25.919999999999998,
+        "final_temperature": 25.993333333333336,
+        "predicted_feels_like": 26.84065808856597
+      },
+      {
+        "time": "2025-10-13 02:00:00",
+        "lstm_temperature": 21.59342980980873,
+        "recent_5d_avg": 25.9,
+        "hist_5yr_avg": 25.520000000000003,
+        "final_temperature": 25.781666666666666,
+        "predicted_feels_like": 26.195773528363475
+      },
+      {
+        "time": "2025-10-13 03:00:00",
+        "lstm_temperature": 22.22481132149696,
+        "recent_5d_avg": 25.75,
+        "hist_5yr_avg": 25.4,
+        "final_temperature": 25.548333333333332,
+        "predicted_feels_like": 25.548333333333332
+      },
+      {
+        "time": "2025-10-13 04:00:00",
+        "lstm_temperature": 23.695088374614713,
+        "recent_5d_avg": 25.5,
+        "hist_5yr_avg": 25.22,
+        "final_temperature": 25.491666666666664,
+        "predicted_feels_like": 25.491666666666664
+      },
+      {
+        "time": "2025-10-13 05:00:00",
+        "lstm_temperature": 25.283104136586186,
+        "recent_5d_avg": 25.5,
+        "hist_5yr_avg": 25.580000000000002,
+        "final_temperature": 25.83920874436696,
+        "predicted_feels_like": 26.33356880771095
+      },
+      {
+        "time": "2025-10-13 06:00:00",
+        "lstm_temperature": 26.39525246620178,
+        "recent_5d_avg": 25.700000000000003,
+        "hist_5yr_avg": 26.840000000000003,
+        "final_temperature": 26.622465112407998,
+        "predicted_feels_like": 27.84135388319484
+      },
+      {
+        "time": "2025-10-13 07:00:00",
+        "lstm_temperature": 27.27953820824623,
+        "recent_5d_avg": 26.35,
+        "hist_5yr_avg": 28.139999999999997,
+        "final_temperature": 27.356752194762233,
+        "predicted_feels_like": 29.30865223282899
+      },
+      {
+        "time": "2025-10-13 08:00:00",
+        "lstm_temperature": 27.985722494125366,
+        "recent_5d_avg": 27.5,
+        "hist_5yr_avg": 29.520000000000003,
+        "final_temperature": 27.96005714774132,
+        "predicted_feels_like": 30.346021252162334
+      },
+      {
+        "time": "2025-10-13 09:00:00",
+        "lstm_temperature": 28.05508218407631,
+        "recent_5d_avg": 28.8,
+        "hist_5yr_avg": 30.619999999999997,
+        "final_temperature": 28.39127514958382,
+        "predicted_feels_like": 31.17490258656169
+      },
+      {
+        "time": "2025-10-13 10:00:00",
+        "lstm_temperature": 28.25684621930122,
+        "recent_5d_avg": 29.75,
+        "hist_5yr_avg": 31.379999999999995,
+        "final_temperature": 29.483654733896255,
+        "predicted_feels_like": 33.546759538236074
+      },
+      {
+        "time": "2025-10-13 11:00:00",
+        "lstm_temperature": 28.326539242267607,
+        "recent_5d_avg": 30.6,
+        "hist_5yr_avg": 31.439999999999998,
+        "final_temperature": 30.434474369883535,
+        "predicted_feels_like": 35.720408415424316
+      },
+      {
+        "time": "2025-10-13 12:00:00",
+        "lstm_temperature": 29.0281422317028,
+        "recent_5d_avg": 31.0,
+        "hist_5yr_avg": 31.560000000000002,
+        "final_temperature": 30.586613815029462,
+        "predicted_feels_like": 36.045205818429686
+      },
+      {
+        "time": "2025-10-13 13:00:00",
+        "lstm_temperature": 29.01968289017677,
+        "recent_5d_avg": 29.9,
+        "hist_5yr_avg": 31.059999999999995,
+        "final_temperature": 30.256613815029464,
+        "predicted_feels_like": 35.23696208662869
+      },
+      {
+        "time": "2025-10-13 14:00:00",
+        "lstm_temperature": 28.185474336147305,
+        "recent_5d_avg": 29.5,
+        "hist_5yr_avg": 30.560000000000002,
+        "final_temperature": 29.118767743905384,
+        "predicted_feels_like": 32.713341174894126
+      },
+      {
+        "time": "2025-10-13 15:00:00",
+        "lstm_temperature": 28.132923573255535,
+        "recent_5d_avg": 27.6,
+        "hist_5yr_avg": 29.76,
+        "final_temperature": 28.278985894322393,
+        "predicted_feels_like": 31.131052652679003
+      },
+      {
+        "time": "2025-10-13 16:00:00",
+        "lstm_temperature": 26.93099179267883,
+        "recent_5d_avg": 26.950000000000003,
+        "hist_5yr_avg": 28.660000000000004,
+        "final_temperature": 27.103264960149925,
+        "predicted_feels_like": 28.896867336427132
+      },
+      {
+        "time": "2025-10-13 17:00:00",
+        "lstm_temperature": 26.20567439496517,
+        "recent_5d_avg": 26.8,
+        "hist_5yr_avg": 28.52,
+        "final_temperature": 26.53650112996499,
+        "predicted_feels_like": 27.992070159368776
+      },
+      {
+        "time": "2025-10-13 18:00:00",
+        "lstm_temperature": 25.63234059214592,
+        "recent_5d_avg": 26.7,
+        "hist_5yr_avg": 27.840000000000003,
+        "final_temperature": 26.334503746777777,
+        "predicted_feels_like": 27.689342303042935
+      }
+    ]
+  },
+  "Mumbai": {
+    "generated_at": "12 Oct 2025, 06:05 PM",
+    "current_weather": {
+      "temperature": 28.32,
+      "apparent_temperature": 31.01,
+      "humidity": 68,
+      "pressure": 1009,
+      "weather": "Clear Sky",
+      "wind_speed": 4.56,
+      "clouds": 5,
+      "time": "2025-10-12 18:04:59.562716"
+    },
+    "forecast": [
+      {
+        "time": "2025-10-12 19:00:00",
+        "lstm_temperature": 25.259207242727282,
+        "recent_5d_avg": 26.866666666666664,
+        "hist_5yr_avg": 27.860000000000003,
+        "final_temperature": 27.442,
+        "predicted_feels_like": 29.44928061583854
+      },
+      {
+        "time": "2025-10-12 20:00:00",
+        "lstm_temperature": 25.04886358380318,
+        "recent_5d_avg": 26.53333333333333,
+        "hist_5yr_avg": 27.360000000000003,
+        "final_temperature": 27.14911111111111,
+        "predicted_feels_like": 28.972737450882562
+      },
+      {
+        "time": "2025-10-12 21:00:00",
+        "lstm_temperature": 24.835078382492068,
+        "recent_5d_avg": 26.166666666666668,
+        "hist_5yr_avg": 26.959999999999997,
+        "final_temperature": 26.585555555555555,
+        "predicted_feels_like": 28.062695324819277
+      },
+      {
+        "time": "2025-10-12 22:00:00",
+        "lstm_temperature": 24.583040320873263,
+        "recent_5d_avg": 25.833333333333332,
+        "hist_5yr_avg": 26.660000000000004,
+        "final_temperature": 26.24666666666667,
+        "predicted_feels_like": 27.170272668800077
+      },
+      {
+        "time": "2025-10-12 23:00:00",
+        "lstm_temperature": 24.263207012414934,
+        "recent_5d_avg": 25.600000000000005,
+        "hist_5yr_avg": 26.259999999999998,
+        "final_temperature": 26.055555555555557,
+        "predicted_feels_like": 26.493722295143204
+      },
+      {
+        "time": "2025-10-13 00:00:00",
+        "lstm_temperature": 23.876387947797777,
+        "recent_5d_avg": 25.9,
+        "hist_5yr_avg": 26.080000000000002,
+        "final_temperature": 25.87833333333333,
+        "predicted_feels_like": 25.87833333333333
+      },
+      {
+        "time": "2025-10-13 01:00:00",
+        "lstm_temperature": 23.490932786464693,
+        "recent_5d_avg": 25.55,
+        "hist_5yr_avg": 25.879999999999995,
+        "final_temperature": 25.786666666666665,
+        "predicted_feels_like": 25.786666666666665
+      },
+      {
+        "time": "2025-10-13 02:00:00",
+        "lstm_temperature": 23.25003447532654,
+        "recent_5d_avg": 25.35,
+        "hist_5yr_avg": 25.959999999999997,
+        "final_temperature": 25.686666666666667,
+        "predicted_feels_like": 25.686666666666667
+      },
+      {
+        "time": "2025-10-13 03:00:00",
+        "lstm_temperature": 23.190717959403994,
+        "recent_5d_avg": 25.200000000000003,
+        "hist_5yr_avg": 26.18,
+        "final_temperature": 25.60166666666667,
+        "predicted_feels_like": 25.60166666666667
+      },
+      {
+        "time": "2025-10-13 04:00:00",
+        "lstm_temperature": 23.477408015728,
+        "recent_5d_avg": 24.9,
+        "hist_5yr_avg": 26.02,
+        "final_temperature": 25.18325739701589,
+        "predicted_feels_like": 25.18325739701589
+      },
+      {
+        "time": "2025-10-13 05:00:00",
+        "lstm_temperature": 24.14954438209534,
+        "recent_5d_avg": 24.65,
+        "hist_5yr_avg": 26.0,
+        "final_temperature": 25.100679147442182,
+        "predicted_feels_like": 25.100679147442182
+      },
+      {
+        "time": "2025-10-13 06:00:00",
+        "lstm_temperature": 25.484530502557757,
+        "recent_5d_avg": 24.45,
+        "hist_5yr_avg": 25.4,
+        "final_temperature": 25.54107511977354,
+        "predicted_feels_like": 26.063753243640132
+      },
+      {
+        "time": "2025-10-13 07:00:00",
+        "lstm_temperature": 27.22237583398819,
+        "recent_5d_avg": 24.95,
+        "hist_5yr_avg": 26.339999999999996,
+        "final_temperature": 26.36115105609099,
+        "predicted_feels_like": 27.42092614055571
+      },
+      {
+        "time": "2025-10-13 08:00:00",
+        "lstm_temperature": 28.787974262237547,
+        "recent_5d_avg": 26.299999999999997,
+        "hist_5yr_avg": 27.420000000000005,
+        "final_temperature": 27.33206263899803,
+        "predicted_feels_like": 29.297759267281716
+      },
+      {
+        "time": "2025-10-13 09:00:00",
+        "lstm_temperature": 29.761987888813017,
+        "recent_5d_avg": 27.950000000000003,
+        "hist_5yr_avg": 28.76,
+        "final_temperature": 28.433626873493196,
+        "predicted_feels_like": 31.43577025449683
+      },
+      {
+        "time": "2025-10-13 10:00:00",
+        "lstm_temperature": 30.231761240959166,
+        "recent_5d_avg": 29.25,
+        "hist_5yr_avg": 29.940000000000005,
+        "final_temperature": 29.538693658510848,
+        "predicted_feels_like": 33.6031585422166
+      },
+      {
+        "time": "2025-10-13 11:00:00",
+        "lstm_temperature": 30.350400710105895,
+        "recent_5d_avg": 30.0,
+        "hist_5yr_avg": 30.74,
+        "final_temperature": 30.170678613980613,
+        "predicted_feels_like": 34.963321078630564
+      },
+      {
+        "time": "2025-10-13 12:00:00",
+        "lstm_temperature": 30.151909732818602,
+        "recent_5d_avg": 30.35,
+        "hist_5yr_avg": 31.02,
+        "final_temperature": 30.32205174048742,
+        "predicted_feels_like": 35.3262656508983
+      },
+      {
+        "time": "2025-10-13 13:00:00",
+        "lstm_temperature": 29.739069485664366,
+        "recent_5d_avg": 30.4,
+        "hist_5yr_avg": 30.679999999999996,
+        "final_temperature": 30.3003182888031,
+        "predicted_feels_like": 35.27505555347354
+      },
+      {
+        "time": "2025-10-13 14:00:00",
+        "lstm_temperature": 29.253729128837584,
+        "recent_5d_avg": 29.9,
+        "hist_5yr_avg": 30.32,
+        "final_temperature": 30.131666666666664,
+        "predicted_feels_like": 34.88359338260157
+      },
+      {
+        "time": "2025-10-13 15:00:00",
+        "lstm_temperature": 28.75052043199539,
+        "recent_5d_avg": 29.75,
+        "hist_5yr_avg": 29.74,
+        "final_temperature": 29.709999999999997,
+        "predicted_feels_like": 33.91412344796451
+      },
+      {
+        "time": "2025-10-13 16:00:00",
+        "lstm_temperature": 28.28478487730026,
+        "recent_5d_avg": 29.15,
+        "hist_5yr_avg": 29.4,
+        "final_temperature": 29.30333333333333,
+        "predicted_feels_like": 33.01941852372451
+      },
+      {
+        "time": "2025-10-13 17:00:00",
+        "lstm_temperature": 27.872558587789534,
+        "recent_5d_avg": 28.700000000000003,
+        "hist_5yr_avg": 29.080000000000002,
+        "final_temperature": 28.58250018040339,
+        "predicted_feels_like": 31.580029295838887
+      },
+      {
+        "time": "2025-10-13 18:00:00",
+        "lstm_temperature": 27.515001082420348,
+        "recent_5d_avg": 27.65,
+        "hist_5yr_avg": 28.3,
+        "final_temperature": 28.236250270605087,
+        "predicted_feels_like": 30.898204362192715
+      }
+    ]
+  }
+}

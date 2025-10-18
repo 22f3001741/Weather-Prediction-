@@ -1,0 +1,641 @@
+# Core dependencies
+pandas>=2.0.0
+numpy>=1.24.0
+requests>=2.31.0
+
+# Machine Learning
+tensorflow>=2.13.0
+scikit-learn>=1.3.0
+
+# Visualization
+matplotlib>=3.7.0
+seaborn>=0.12.0
+plotly>=5.14.0
+
+# Optional: For LLM integration later
+openai>=1.0.0
+anthropic>=0.5.0
+
+# Utilities
+python-dateutil>=2.8.2
+# import pandas as pd
+# import numpy as np
+# import pickle
+# from tensorflow.keras.models import load_model
+# from datetime import datetime, timedelta
+# import os
+# import requests
+
+# # =============== CONFIGURATION ===============
+# API_KEY = "a6a4628214c32352bb2c057d00365a9e"
+# DATA_FILE = "india_weather_processed.csv"
+# SEQUENCE_LENGTH = 24
+
+# print("="*70)
+# print("🔮 Weather Forecasting - Multi-City Predictions + Live Weather")
+# print("="*70)
+
+# # =============== LOAD DATA ===============
+# print(f"\n📊 Loading weather data from {DATA_FILE}...")
+# df = pd.read_csv(DATA_FILE)
+# df['time'] = pd.to_datetime(df['time'])
+# df = df.sort_values(['city', 'time'])
+# available_cities = df['city'].unique().tolist()
+
+# print(f"✅ Loaded {len(df):,} records across {len(available_cities)} cities:")
+# print(", ".join(available_cities))
+
+# # =============== FEATURE COLUMNS ===============
+# feature_cols = [
+#     'temperature (°C)',
+#     'humidity (%)',
+#     'pressure_msl (hPa)',
+#     'wind_speed (m/s)',
+#     'cloud_cover (%)',
+#     'hour',
+#     'day_of_week',
+#     'month'
+# ]
+
+# # =============== LIVE WEATHER FETCHER ===============
+# def get_current_weather(city):
+#     """Fetch current weather using OpenWeatherMap API."""
+#     url = f"http://api.openweathermap.org/data/2.5/weather?q={city},IN&appid={API_KEY}&units=metric"
+#     try:
+#         r = requests.get(url, timeout=10)
+#         r.raise_for_status()
+#         data = r.json()
+#         return {
+#             "temperature": data["main"]["temp"],
+#             "feels_like": data["main"]["feels_like"],
+#             "humidity": data["main"]["humidity"],
+#             "pressure": data["main"]["pressure"],
+#             "weather": data["weather"][0]["description"].title(),
+#             "wind_speed": data["wind"]["speed"],
+#             "clouds": data["clouds"]["all"],
+#             "time": datetime.now().strftime("%Y-%m-%d %I:%M %p")
+#         }
+#     except Exception as e:
+#         return None
+
+# # =============== FORECAST FUNCTION ===============
+# def predict_next_hours(city, model, scaler, city_df, n_hours=24, current_weather=None):
+#     """
+#     Predict temperature for next n hours.
+#     If current_weather is provided, incorporate it to anchor predictions to reality.
+#     """
+#     print(f"\n🔮 Predicting next {n_hours} hours for {city}...")
+
+#     predictions = []
+#     last_known_time = city_df['time'].iloc[-1]
+#     current_sequence = city_df[feature_cols].tail(SEQUENCE_LENGTH).values.copy()
+    
+#     # If we have current live weather, use it to update the most recent data point
+#     if current_weather:
+#         print("   ⚡ Incorporating current live weather for better accuracy...")
+#         # Update the last timestep with current weather
+#         current_sequence[-1, 0] = current_weather['temperature']  # temperature
+#         current_sequence[-1, 1] = current_weather['humidity']     # humidity
+#         current_sequence[-1, 2] = current_weather['pressure']     # pressure
+#         current_sequence[-1, 3] = current_weather['wind_speed']   # wind_speed
+#         current_sequence[-1, 4] = current_weather['clouds']       # cloud_cover
+        
+#         # Also update the second-to-last timestep with partial influence
+#         # This simulates having yesterday's updated data
+#         blend_factor = 0.3  # 30% influence from current weather
+#         current_sequence[-2, 0] = (1 - blend_factor) * current_sequence[-2, 0] + blend_factor * current_weather['temperature']
+#         current_sequence[-2, 1] = (1 - blend_factor) * current_sequence[-2, 1] + blend_factor * current_weather['humidity']
+
+#     for i in range(n_hours):
+#         scaled_seq = scaler.transform(current_sequence)
+#         X_pred = scaled_seq.reshape(1, SEQUENCE_LENGTH, len(feature_cols))
+#         pred_scaled = model.predict(X_pred, verbose=0)[0][0]
+
+#         dummy = np.zeros((1, len(feature_cols)))
+#         dummy[0, 0] = pred_scaled
+#         pred_temp = scaler.inverse_transform(dummy)[0, 0]
+
+#         pred_time = last_known_time + timedelta(hours=i + 1)
+#         predictions.append({'time': pred_time, 'predicted_temperature': pred_temp})
+
+#         current_sequence = np.roll(current_sequence, -1, axis=0)
+#         current_sequence[-1, 0] = pred_temp
+#         current_sequence[-1, 5] = pred_time.hour
+#         current_sequence[-1, 6] = pred_time.weekday()
+#         current_sequence[-1, 7] = pred_time.month
+
+#     return pd.DataFrame(predictions)
+
+# # =============== MAIN LOOP ===============
+# for CITY in available_cities:
+#     print("\n" + "="*70)
+#     print(f"🏙️  City: {CITY}")
+#     print("="*70)
+
+#     model_path = f"{CITY}_lstm_model_best.h5" if os.path.exists(f"{CITY}_lstm_model_best.h5") else f"{CITY}_lstm_model_final.h5"
+#     scaler_path = f"{CITY}_scaler.pkl"
+
+#     if not os.path.exists(model_path) or not os.path.exists(scaler_path):
+#         print(f"⚠️ Missing model or scaler for {CITY}, skipping.")
+#         continue
+
+#     # Load model and scaler
+#     model = load_model(model_path, compile=False)
+#     model.compile(optimizer='adam', loss='mse', metrics=['mae'])
+#     with open(scaler_path, 'rb') as f:
+#         scaler = pickle.load(f)
+
+#     city_df = df[df['city'] == CITY].copy()
+#     if len(city_df) < SEQUENCE_LENGTH:
+#         print(f"⚠️ Not enough data for {CITY}, skipping.")
+#         continue
+
+#     # Fetch current live weather 🌤️
+#     print("🌍 Fetching current live weather...")
+#     current = get_current_weather(CITY)
+#     if current:
+#         print(f"\n📅 Current Weather in {CITY} ({current['time']}):")
+#         print(f"   🌡️ Temp: {current['temperature']:.1f}°C (Feels like {current['feels_like']:.1f}°C)")
+#         print(f"   💧 Humidity: {current['humidity']}%")
+#         print(f"   🌬️ Wind: {current['wind_speed']} m/s")
+#         print(f"   ☁️  Clouds: {current['clouds']}%")
+#         print(f"   📋 Condition: {current['weather']}")
+#     else:
+#         print("⚠️ Unable to fetch current weather.")
+
+#     # Predict next 24 hours 🌤️
+#     preds = predict_next_hours(CITY, model, scaler, city_df, n_hours=24, current_weather=current)
+
+#     print("\n📊 24-HOUR FORECAST")
+#     print("="*70)
+#     for _, row in preds.iterrows():
+#         print(f"   {row['time'].strftime('%Y-%m-%d %I:%M %p')} → {row['predicted_temperature']:.2f}°C")
+
+#     # Forecast summary
+#     avg_temp = preds['predicted_temperature'].mean()
+#     min_temp = preds['predicted_temperature'].min()
+#     max_temp = preds['predicted_temperature'].max()
+
+#     print("\n📈 Summary:")
+#     print(f"   Avg Temp: {avg_temp:.2f}°C | Min: {min_temp:.2f}°C | Max: {max_temp:.2f}°C")
+
+#     # Quick outlook
+#     print("\n🌤️ QUICK OUTLOOK:")
+#     if avg_temp > 35:
+#         print("   🔥 Very Hot - Stay hydrated")
+#     elif avg_temp > 30:
+#         print("   ☀️ Hot - Warm day expected")
+#     elif avg_temp > 25:
+#         print("   🌤️ Pleasant - Nice weather")
+#     elif avg_temp > 20:
+#         print("   😊 Moderate - Comfortable temperature")
+#     elif avg_temp > 15:
+#         print("   🌥️ Cool - Light jacket recommended")
+#     else:
+#         print("   🥶 Cold - Warm clothing advised")
+
+#     if (max_temp - min_temp) > 15:
+#         print("   ⚠️ Large temperature variation expected throughout the day")
+
+# print("\n" + "="*70)
+# print("✅ All available city forecasts + live weather completed!")
+# print("="*70)
+
+# smart_predictions.py
+# import pandas as pd
+# import numpy as np
+# import pickle
+# from tensorflow.keras.models import load_model
+# from datetime import datetime, timedelta
+# import os
+# import requests
+
+# # ---------- CONFIG ----------
+# API_KEY = "a6a4628214c32352bb2c057d00365a9e"
+# DATA_FILE = "india_weather_processed.csv"          # processed hourly data (your main dataset)
+# HIST_FILE = "india_weather_historical.csv"        # (optional) fuller historical file; falls back to DATA_FILE
+# SEQUENCE_LENGTH = 24
+
+# # Blending weights (adjustable)
+# W_LSTM = 0.40
+# W_HIST = 0.35
+# W_RECENT = 0.25
+
+# print("="*70)
+# print("🧠 Smart Weather Forecasting - Hourly Hybrid (LSTM + Recent5d + Climatology5yr)")
+# print("="*70)
+
+# # ---------- LOAD DATA ----------
+# print(f"\n📊 Loading weather data from {DATA_FILE}...")
+# df = pd.read_csv(DATA_FILE)
+# df['time'] = pd.to_datetime(df['time'])
+# df = df.sort_values(['city', 'time']).reset_index(drop=True)
+# cities = df['city'].unique().tolist()
+# print(f"✅ Loaded {len(df):,} records across {len(cities)} cities: {', '.join(cities)}")
+
+# # Historical Data: prefer HIST_FILE if present, otherwise use processed df as historical baseline
+# if os.path.exists(HIST_FILE):
+#     hist_df = pd.read_csv(HIST_FILE)
+#     hist_df['time'] = pd.to_datetime(hist_df['time'])
+#     print(f"📜 Loaded historical file: {HIST_FILE} ({len(hist_df):,} records)")
+# else:
+#     hist_df = df.copy()
+#     print("⚠️ HIST_FILE not found — using processed data as historical baseline")
+
+# # ---------- FEATURES (order must match scaler training) ----------
+# feature_cols = [
+#     'temperature (°C)',    # index 0: target
+#     'humidity (%)',
+#     'pressure_msl (hPa)',
+#     'wind_speed (m/s)',
+#     'cloud_cover (%)',
+#     'hour',
+#     'day_of_week',
+#     'month'
+# ]
+
+# # ---------- LIVE WEATHER (OpenWeatherMap) ----------
+# def get_current_weather(city):
+#     url = f"http://api.openweathermap.org/data/2.5/weather?q={city},IN&appid={API_KEY}&units=metric"
+#     try:
+#         r = requests.get(url, timeout=10)
+#         r.raise_for_status()
+#         d = r.json()
+#         return {
+#             "temperature": d["main"]["temp"],
+#             "feels_like": d["main"]["feels_like"],
+#             "humidity": d["main"]["humidity"],
+#             "pressure": d["main"]["pressure"],
+#             "weather": d["weather"][0]["description"].title(),
+#             "wind_speed": d["wind"].get("speed", np.nan),
+#             "clouds": d["clouds"].get("all", np.nan),
+#             "time": datetime.now()
+#         }
+#     except Exception as e:
+#         print(f"⚠️ Live fetch failed for {city}: {e}")
+#         return None
+
+# # ---------- HISTORICAL / RECENT AVERAGES ----------
+# def get_recent_hourly_avg(city_df, target_dt, days=5):
+#     """
+#     Average of same hour-of-day over the last `days` days (up to target_dt exclusive).
+#     """
+#     end = target_dt
+#     start = end - pd.Timedelta(days=days)
+#     mask = (city_df['time'] >= start) & (city_df['time'] < end) & (city_df['time'].dt.hour == target_dt.hour)
+#     subset = city_df.loc[mask, 'temperature (°C)']
+#     if subset.empty:
+#         return None
+#     return subset.mean()
+
+# def get_historical_hourly_avg(hist_df, city, target_dt, years=5, day_window=0):
+#     """
+#     Average of same month/day/hour for the past `years` years.
+#     If insufficient data, relax to same month & hour across the available years.
+#     day_window allows +/- days around the target day (0 by default).
+#     """
+#     # restrict to target window of years (target_year - years .. target_year -1)
+#     start_year = target_dt.year - years
+#     end_year = target_dt.year - 1
+#     mask_city = (hist_df['city'] == city)
+#     mask_years = (hist_df['time'].dt.year >= start_year) & (hist_df['time'].dt.year <= end_year)
+#     mask_hour = (hist_df['time'].dt.hour == target_dt.hour)
+#     mask_month = (hist_df['time'].dt.month == target_dt.month)
+#     if day_window == 0:
+#         mask_day = (hist_df['time'].dt.day == target_dt.day)
+#     else:
+#         md = hist_df['time'].dt.day
+#         mask_day = (abs(md - target_dt.day) <= day_window)
+
+#     subset = hist_df.loc[mask_city & mask_years & mask_month & mask_day & mask_hour, 'temperature (°C)']
+#     if len(subset) >= 1:
+#         return subset.mean()
+
+#     # fallback 1: same month & hour across years
+#     subset2 = hist_df.loc[mask_city & mask_years & mask_month & mask_hour, 'temperature (°C)']
+#     if len(subset2) >= 1:
+#         return subset2.mean()
+
+#     # fallback 2: same hour across all years for the city (weak fallback)
+#     subset3 = hist_df.loc[mask_city & mask_hour, 'temperature (°C)']
+#     if len(subset3) >= 1:
+#         return subset3.mean()
+
+#     return None
+
+# # ---------- PREDICTION LOOP (LSTM + per-hour blending) ----------
+# def predict_next_hours(city, model, scaler, city_df, current_live, hist_df, n_hours=24):
+#     """
+#     Predict next n hours using:
+#       - LSTM model
+#       - 5-day recent hourly averages
+#       - 5-year climatology averages
+#     with adaptive fusion and live-weather anchoring for the first few hours.
+#     """
+#     city_df = city_df.copy().reset_index(drop=True)
+#     seq_raw = city_df[feature_cols].tail(SEQUENCE_LENGTH).values.copy()
+
+#     # inject live weather
+#     seq_raw[-1, 0] = current_live['temperature']
+#     seq_raw[-1, 1] = current_live['humidity']
+#     seq_raw[-1, 3] = current_live['wind_speed']
+#     seq_raw[-1, 4] = current_live['clouds']
+#     seq_raw[-1, 5] = current_live['time'].hour
+#     seq_raw[-1, 6] = current_live['time'].weekday()
+#     seq_raw[-1, 7] = current_live['time'].month
+
+#     now = current_live['time']
+#     next_hour = (now + timedelta(hours=1)).replace(minute=0, second=0, microsecond=0)
+
+#     pred_times, lstm_preds, recents, hists, finals = [], [], [], [], []
+#     prev_temp = current_live['temperature']  # anchor
+
+#     for h in range(n_hours):
+#         scaled_seq = scaler.transform(seq_raw)
+#         X = scaled_seq.reshape(1, SEQUENCE_LENGTH, len(feature_cols))
+#         pred_scaled = model.predict(X, verbose=0)[0][0]
+
+#         # inverse transform
+#         scaled_last = scaled_seq[-1].copy()
+#         scaled_last[0] = pred_scaled
+#         pred_temp = scaler.inverse_transform([scaled_last])[0][0]
+
+#         ptime = next_hour + timedelta(hours=h)
+#         lstm_preds.append(pred_temp)
+#         pred_times.append(ptime)
+
+#         # contextual climatology
+#         recent_avg = get_recent_hourly_avg(city_df, ptime, days=5)
+#         hist_avg = get_historical_hourly_avg(hist_df, city, ptime, years=5)
+#         recents.append(recent_avg)
+#         hists.append(hist_avg)
+
+#         # --- Adaptive closest-pair logic ---
+#         valid_values = {"lstm": pred_temp, "recent": recent_avg, "hist": hist_avg}
+#         valid_values = {k: v for k, v in valid_values.items() if v is not None}
+
+#         if len(valid_values) == 3:
+#             keys = list(valid_values.keys())
+#             vals = list(valid_values.values())
+#             dist = {
+#                 (keys[0], keys[1]): abs(vals[0] - vals[1]),
+#                 (keys[0], keys[2]): abs(vals[0] - vals[2]),
+#                 (keys[1], keys[2]): abs(vals[1] - vals[2]),
+#             }
+#             best_pair = min(dist, key=dist.get)
+#             v1, v2 = valid_values[best_pair[0]], valid_values[best_pair[1]]
+#             hybrid_temp = 0.5 * (v1 + v2)
+#         elif len(valid_values) == 2:
+#             hybrid_temp = np.mean(list(valid_values.values()))
+#         elif len(valid_values) == 1:
+#             hybrid_temp = list(valid_values.values())[0]
+#         else:
+#             hybrid_temp = pred_temp
+
+#         # --- Live anchoring for first forecast hour ---
+#         if h == 0:
+#             final_temp = 0.6 * prev_temp + 0.4 * hybrid_temp
+#         else:
+#             final_temp = hybrid_temp
+
+#         # --- Momentum dampening ---
+#         if abs(final_temp - prev_temp) > 2.5:
+#             final_temp = 0.7 * prev_temp + 0.3 * final_temp
+
+#         finals.append(final_temp)
+#         prev_temp = final_temp
+
+#         # update rolling window
+#         raw_row = seq_raw[-1].copy()
+#         raw_row[0] = final_temp
+#         raw_row[5] = ptime.hour
+#         raw_row[6] = ptime.weekday()
+#         raw_row[7] = ptime.month
+#         seq_raw = np.roll(seq_raw, -1, axis=0)
+#         seq_raw[-1] = raw_row
+
+#     preds = pd.DataFrame({
+#         "time": pred_times,
+#         "lstm_temperature": lstm_preds,
+#         "recent_5d_avg": recents,
+#         "hist_5yr_avg": hists,
+#         "final_temperature": finals
+#     })
+
+#     # --- Light smoothing to reduce abrupt oscillations ---
+#     preds["final_temperature"] = preds["final_temperature"].rolling(window=3, min_periods=1, center=True).mean()
+#     return preds
+
+
+# # ---------- RUN FOR EACH CITY ----------
+# for CITY in cities:
+#     print("\n" + "="*70)
+#     print(f"🏙️  CITY: {CITY}")
+#     print("="*70)
+
+#     # pick model and scaler files
+#     model_file1 = f"{CITY}_lstm_model_best.h5"
+#     model_file2 = f"{CITY}_lstm_model_final.h5"
+#     model_path = model_file1 if os.path.exists(model_file1) else (model_file2 if os.path.exists(model_file2) else None)
+#     scaler_path = f"{CITY}_scaler.pkl"
+
+#     if model_path is None or not os.path.exists(scaler_path):
+#         print(f"⚠️ Missing model or scaler for {CITY}. Expected: {model_file1} or {model_file2}, and {scaler_path}. Skipping.")
+#         continue
+
+#     # load model & scaler
+#     model = load_model(model_path, compile=False)
+#     model.compile(optimizer='adam', loss='mse')
+#     with open(scaler_path, 'rb') as f:
+#         scaler = pickle.load(f)
+
+#     city_df = df[df['city'] == CITY].copy()
+#     if len(city_df) < SEQUENCE_LENGTH:
+#         print("⚠️ Not enough historical rows for sequence. Skipping.")
+#         continue
+
+#     # fetch live weather
+#     print("🌍 Fetching live weather...")
+#     live = get_current_weather(CITY)
+#     if live is None:
+#         print("⚠️ No live data available — skipping city.")
+#         continue
+
+#     print(f"\n📅 Current Weather in {CITY} ({live['time'].strftime('%Y-%m-%d %I:%M %p')}):")
+#     print(f"   🌡️ Temp: {live['temperature']:.1f}°C (Feels {live['feels_like']:.1f}°C)")
+#     print(f"   💧 Humidity: {live['humidity']}% | 🌬️ Wind: {live['wind_speed']} m/s | ☁️ Clouds: {live['clouds']}%")
+#     print(f"   📋 Condition: {live['weather']}")
+
+#     # Make predictions
+#     preds = predict_next_hours(CITY, model, scaler, city_df, live, hist_df, n_hours=24)
+
+#     # Print output (starts at next top-of-hour)
+#     print("\n📊 24-HOUR FORECAST (per-hour hybrid: LSTM + recent5d + hist5yr)")
+#     print("="*70)
+#     for _, row in preds.iterrows():
+#         recent_text = f" | 5d {row['recent_5d_avg']:.2f}°C" if pd.notna(row['recent_5d_avg']) else ""
+#         hist_text = f" | 5yr {row['hist_5yr_avg']:.2f}°C" if pd.notna(row['hist_5yr_avg']) else ""
+#         print(
+#             f"   {row['time'].strftime('%Y-%m-%d %I:%M %p')} → {row['final_temperature']:.2f}°C"
+#             f"   (LSTM {row['lstm_temperature']:.2f}°C{recent_text}{hist_text})"
+#         )
+
+#     avg_t = preds['final_temperature'].mean()
+#     min_t = preds['final_temperature'].min()
+#     max_t = preds['final_temperature'].max()
+#     print("\n📈 Summary:")
+#     print(f"   Avg Temp: {avg_t:.2f}°C | Min: {min_t:.2f}°C | Max: {max_t:.2f}°C")
+
+# print("\n" + "="*70)
+# print("✅ All city forecasts completed.")
+# print("="*70)
+
+# """
+# update_weather_data.py
+# Fetches recent hourly weather data for 5 Indian cities and updates the main india_weather_processed.csv file.
+# """
+
+# import os
+# import pandas as pd
+# import requests
+# import datetime as dt
+
+# # ===========================================================
+# # Configuration
+# # ===========================================================
+
+# # Find the project root dynamically (so works whether run from /scripts_v2 or root)
+# ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+# DATA_FILE = os.path.join(ROOT_DIR, "india_weather_processed.csv")
+
+# CITIES = {
+#     "Bengaluru": (12.97, 77.59),
+#     "Chennai": (13.08, 80.27),
+#     "Delhi": (28.61, 77.21),
+#     "Kolkata": (22.57, 88.36),
+#     "Mumbai": (19.07, 72.88)
+# }
+
+# # ===========================================================
+
+
+# def fetch_weather_data(city, lat, lon, start_date, end_date):
+#     """Fetch hourly weather data from Open-Meteo API (archive endpoint)."""
+#     url = (
+#         f"https://archive-api.open-meteo.com/v1/archive?"
+#         f"latitude={lat}&longitude={lon}"
+#         f"&start_date={start_date}&end_date={end_date}"
+#         f"&hourly=temperature_2m,apparent_temperature,relative_humidity_2m,"
+#         f"dew_point_2m,surface_pressure,cloud_cover,wind_speed_10m,wind_direction_10m,"
+#         f"wind_gusts_10m"
+#         f"&timezone=Asia%2FKolkata"
+#     )
+
+#     try:
+#         resp = requests.get(url, timeout=20)
+#         data = resp.json()
+#         if "hourly" not in data:
+#             print(f"⚠️ No hourly data returned for {city}.")
+#             return pd.DataFrame()
+#         hourly = data["hourly"]
+#         df = pd.DataFrame(hourly)
+#         df["city"] = city
+#         return df
+#     except Exception as e:
+#         print(f"❌ Failed to fetch data for {city}: {e}")
+#         return pd.DataFrame()
+
+
+# def process_df(df):
+#     """Clean and match column format of india_weather_processed.csv."""
+#     if df.empty:
+#         return df
+
+#     df.rename(columns={
+#         "temperature_2m": "temperature (°C)",
+#         "apparent_temperature": "apparent_temperature (°C)",
+#         "relative_humidity_2m": "humidity (%)",
+#         "dew_point_2m": "dew_point (°C)",
+#         "surface_pressure": "pressure_msl (hPa)",
+#         "cloud_cover": "cloud_cover (%)",
+#         "wind_speed_10m": "wind_speed (m/s)",
+#         "wind_direction_10m": "wind_direction (°)",
+#         "wind_gusts_10m": "wind_gusts (m/s)",
+#         "time": "time"
+#     }, inplace=True)
+
+#     df["datetime"] = pd.to_datetime(df["time"])
+#     df["year"] = df["datetime"].dt.year
+#     df["month"] = df["datetime"].dt.month
+#     df["day"] = df["datetime"].dt.day
+#     df["hour"] = df["datetime"].dt.hour
+#     df["day_of_week"] = df["datetime"].dt.dayofweek
+#     df["season"] = df["month"].map({
+#         12: "Winter", 1: "Winter", 2: "Winter",
+#         3: "Pre-monsoon", 4: "Pre-monsoon", 5: "Pre-monsoon",
+#         6: "Monsoon", 7: "Monsoon", 8: "Monsoon", 9: "Monsoon",
+#         10: "Post-monsoon", 11: "Post-monsoon"
+#     })
+#     return df
+
+
+# def main():
+#     print("📂 Checking existing dataset...")
+
+#     if os.path.exists(DATA_FILE):
+#         df_old = pd.read_csv(DATA_FILE)
+#         df_old["datetime"] = pd.to_datetime(df_old["time"])
+#         print(f"✅ Found existing dataset: {DATA_FILE}")
+#         print(f"   Records: {len(df_old)} | Cities: {df_old['city'].nunique()}")
+#     else:
+#         print("⚠️ No existing dataset found. Creating a new one...")
+#         df_old = pd.DataFrame()
+
+#     new_data = []
+#     today = dt.date.today()
+#     end_date = today.strftime("%Y-%m-%d")
+
+#     for city, (lat, lon) in CITIES.items():
+#         print(f"\n🌆 Updating data for {city}...")
+#         if not df_old.empty and city in df_old["city"].unique():
+#             last_time = df_old[df_old["city"] == city]["datetime"].max()
+#             start_date = (last_time + dt.timedelta(hours=1)).date().strftime("%Y-%m-%d")
+#         else:
+#             start_date = (today - dt.timedelta(days=7)).strftime("%Y-%m-%d")
+
+#         if start_date >= end_date:
+#             print(f"✅ {city} already up to date.")
+#             continue
+
+#         print(f"⏳ Fetching {start_date} → {end_date} ...")
+#         df_new = fetch_weather_data(city, lat, lon, start_date, end_date)
+#         df_new = process_df(df_new)
+#         if not df_new.empty:
+#             print(f"   ✅ New records fetched: {len(df_new)}")
+#             new_data.append(df_new)
+#         else:
+#             print(f"   ⚠️ No new data fetched for {city}.")
+
+#     if not new_data:
+#         print("\n✅ All cities are already up to date.")
+#         return
+
+#     df_new_all = pd.concat(new_data, ignore_index=True)
+#     print("\n📦 Merging new data with existing dataset...")
+
+#     if not df_old.empty:
+#         df_combined = pd.concat([df_old, df_new_all], ignore_index=True)
+#         df_combined.drop_duplicates(subset=["city", "time"], inplace=True)
+#     else:
+#         df_combined = df_new_all
+
+#     df_combined.sort_values(["city", "datetime"], inplace=True)
+#     df_combined.reset_index(drop=True, inplace=True)
+
+#     df_combined.to_csv(DATA_FILE, index=False)
+#     print(f"✅ Dataset updated and saved to: {DATA_FILE}")
+#     print(f"📈 Total records now: {len(df_combined)}")
+
+
+# if __name__ == "__main__":
+#     main()

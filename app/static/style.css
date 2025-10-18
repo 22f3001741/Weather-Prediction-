@@ -1,0 +1,154 @@
+/* 🌌 Hybrid Weather Prediction Dashboard Theme */
+body {
+  font-family: "Poppins", "Segoe UI", sans-serif;
+  background: radial-gradient(circle at 20% 20%, #020c1b 0%, #000000 100%);
+  color: #e6f7ff;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+h1 {
+  font-size: 2.4rem;
+  color: #00ffff;
+  text-shadow: 0 0 12px rgba(0, 255, 255, 0.7);
+  margin-top: 40px;
+}
+
+h2 {
+  color: #00e0ff;
+  text-shadow: 0 0 10px rgba(0, 224, 255, 0.6);
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+h3 {
+  color: #00ffff;
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.4);
+}
+
+/* Live Weather Box */
+.live-box {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.08);
+  border-radius: 20px;
+  width: 70%;
+  margin: 15px auto 25px;
+  padding: 15px 30px;
+  backdrop-filter: blur(12px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.live-box:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
+}
+
+.live-box p {
+  font-size: 1rem;
+  color: #e0f9ff;
+  margin: 6px 0;
+}
+
+/* Chart Section */
+.chart-container {
+  width: 80%;
+  max-width: 800px;
+  margin: 0 auto 30px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: inset 0 0 10px rgba(0, 255, 255, 0.05),
+              0 0 20px rgba(0, 255, 255, 0.05);
+}
+
+/* Table Styling */
+.forecast-table {
+  width: 90%;
+  max-width: 950px;
+  margin: 0 auto 50px;
+  border-collapse: collapse;
+  overflow-x: auto;
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 18px;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.15);
+}
+
+.forecast-table table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #e6faff;
+}
+
+.forecast-table th,
+.forecast-table td {
+  border: 1px solid rgba(0, 255, 255, 0.15);
+  padding: 10px 6px;
+  font-size: 0.9rem;
+}
+
+.forecast-table th {
+  background: rgba(0, 255, 255, 0.1);
+  text-shadow: 0 0 6px rgba(0, 255, 255, 0.6);
+  font-weight: 600;
+}
+
+.forecast-table tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.forecast-table tr:hover {
+  background: rgba(0, 255, 255, 0.08);
+  transition: background 0.2s ease-in-out;
+}
+
+/* Footer */
+footer {
+  color: #00ffff;
+  font-size: 0.9rem;
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
+  margin-bottom: 25px;
+}
+
+/* Section styling */
+.city-section {
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 15, 25, 0.8) 0%,
+    rgba(0, 20, 40, 0.4) 100%
+  );
+}
+
+/* Animated glow around charts */
+canvas {
+  border-radius: 15px;
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.3);
+  animation: softGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes softGlow {
+  from {
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+  }
+  to {
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+  }
+}
+
+/* Responsive layout */
+@media (max-width: 768px) {
+  body {
+    font-size: 90%;
+  }
+  .live-box, .chart-container, .forecast-table {
+    width: 95%;
+  }
+  h1 {
+    font-size: 1.6rem;
+  }
+}
